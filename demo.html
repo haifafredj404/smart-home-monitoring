@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Home Monitoring – Démo</title>
+<style>
+  body { margin: 0; padding: 24px; background: #0b0d1a; }
+  .demo-box { max-width: 1100px; margin: 0 auto; }
+  .demo-note { max-width: 1100px; margin: 0 auto 14px; color: #9aa3c7; font: 13px -apple-system, "Segoe UI", sans-serif; }
+</style>
+</head>
+<body>
+<div class="demo-note">Démo autonome : les données sont simulées. En production, elles viennent d'un capteur via MQTT et Node-RED.</div>
+<div class="demo-box">
+<style>
+  .vp-wrap {
+    --fg: #fff; --fg2: rgba(255,255,255,.7);
+    --card: rgba(255,255,255,.14); --cardb: rgba(255,255,255,.28); --track: rgba(255,255,255,.2);
+    width: 100%; box-sizing: border-box; padding: 22px 18px; border-radius: 32px; overflow: hidden;
+    font-family: -apple-system, "SF Pro Display", "Segoe UI", Roboto, sans-serif; color: var(--fg);
+    background:
+      radial-gradient(circle at 15% 20%, #5b8cff 0%, transparent 45%),
+      radial-gradient(circle at 85% 80%, #b06cff 0%, transparent 45%),
+      radial-gradient(circle at 70% 15%, #29d3c6 0%, transparent 40%),
+      #0f1226;
+  }
+  .vp-wrap.light {
+    --fg: #14182d; --fg2: rgba(20,24,45,.65);
+    --card: rgba(255,255,255,.55); --cardb: rgba(255,255,255,.95); --track: rgba(20,24,45,.12);
+    background:
+      radial-gradient(circle at 15% 20%, #a9c1ff 0%, transparent 45%),
+      radial-gradient(circle at 85% 80%, #e0c4ff 0%, transparent 45%),
+      radial-gradient(circle at 70% 15%, #a8f0e8 0%, transparent 40%),
+      #eef2fb;
+  }
+  .vp-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
+  .vp-title, .vp-head { background: transparent !important; color: var(--fg) !important; padding: 0; }
+  .vp-title { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; opacity: .7; margin: 0 0 2px 4px; }
+  .vp-head  { font-size: 26px; font-weight: 600; margin: 0 0 0 4px; }
+  .vp-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+  .vp-status { display: flex; align-items: center; gap: 7px; font-size: 12px; padding: 7px 12px; border-radius: 999px;
+               background: var(--card); border: 1px solid var(--cardb); color: var(--fg); }
+  .vp-led { width: 9px; height: 9px; border-radius: 50%; background: #888; }
+  .vp-led.ok { background: #30d158; box-shadow: 0 0 8px #30d158; }
+  .vp-led.ko { background: #ff453a; box-shadow: 0 0 8px #ff453a; }
+  .vp-btn { cursor: pointer; border: 1px solid var(--cardb); background: var(--card); color: var(--fg);
+            border-radius: 999px; padding: 7px 12px; font-size: 13px; }
+
+  .vp-alert { margin-bottom: 14px; padding: 12px 16px; border-radius: 18px; font-size: 14px; font-weight: 500;
+              background: rgba(48,209,88,.25); border: 1px solid rgba(48,209,88,.6); color: var(--fg); }
+  .vp-alert.warn   { background: rgba(255,214,10,.28); border-color: rgba(255,214,10,.8); }
+  .vp-alert.danger { background: rgba(255,69,58,.32);  border-color: rgba(255,69,58,.85); }
+
+  .vp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 700px) { .vp-grid { grid-template-columns: 1fr; } }
+  .vp-card { min-width: 0; box-sizing: border-box; padding: 18px 14px 16px; border-radius: 26px;
+             background: var(--card); backdrop-filter: blur(28px) saturate(160%); -webkit-backdrop-filter: blur(28px) saturate(160%);
+             border: 1px solid var(--cardb); box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 16px 32px rgba(0,0,0,.2);
+             text-align: center; color: var(--fg); }
+  .vp-wide { grid-column: 1 / -1; text-align: left; }
+  .vp-label { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px; font-weight: 500; }
+  .vp-wide .vp-label { justify-content: flex-start; }
+
+  .vp-gauge { position: relative; width: 100%; max-width: 130px; aspect-ratio: 1/1; margin: 12px auto 0; }
+  .vp-gauge svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .vp-track { fill: none; stroke: var(--track); stroke-width: 12; }
+  .vp-bar { fill: none; stroke-width: 12; stroke-linecap: round;
+            transition: stroke-dashoffset .8s cubic-bezier(.4,0,.2,1), stroke .4s; filter: drop-shadow(0 0 6px currentColor); }
+  .vp-value { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .vp-value b { font-size: 30px; font-weight: 600; line-height: 1; color: var(--fg) !important; background: transparent !important; }
+  .vp-value small { font-size: 11px; color: var(--fg2) !important; margin-top: 4px; background: transparent !important; }
+
+  .vp-motion { min-height: 130px; margin-top: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+  .vp-pill { padding: 8px 18px; border-radius: 999px; font-size: 15px; font-weight: 600; letter-spacing: .05em;
+             background: rgba(80,220,140,.28); border: 1px solid rgba(120,240,170,.6); color: var(--fg); transition: all .3s; }
+  .vp-pill.on { background: rgba(255,99,99,.4); border-color: rgba(255,140,140,.8); box-shadow: 0 0 22px rgba(255,99,99,.65); }
+  .vp-dot { width: 14px; height: 14px; border-radius: 50%; background: #50dc8c; box-shadow: 0 0 14px #50dc8c; }
+  .vp-dot.on { background: #ff6363; box-shadow: 0 0 18px #ff6363; animation: vp-pulse 1s infinite; }
+  @keyframes vp-pulse { 50% { transform: scale(1.5); opacity: .6; } }
+
+  .vp-chart-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; font-size: 12px; color: var(--fg2); margin-top: 6px; }
+  .vp-chart svg { width: 100%; height: 160px; margin-top: 10px; display: block; }
+  .vp-legend { display: flex; gap: 14px; font-size: 12px; color: var(--fg2); margin-top: 8px; }
+  .vp-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+  .vp-events { list-style: none; margin: 10px 0 0; padding: 0; font-size: 13px; color: var(--fg); }
+  .vp-events li { padding: 7px 0; border-bottom: 1px solid var(--track); display: flex; justify-content: space-between; }
+  .vp-events li:last-child { border-bottom: 0; }
+</style>
+
+<div class="vp-wrap" id="vp-root">
+  <div class="vp-top">
+    <div>
+      <div class="vp-title" style="background:transparent!important;color:var(--fg)!important">Smart Home</div>
+      <div class="vp-head" style="background:transparent!important;color:var(--fg)!important">Monitoring</div>
+    </div>
+    <div class="vp-tools">
+      <div class="vp-status"><span class="vp-led" id="vp-led"></span><span id="vp-online">En attente…</span></div>
+      <button class="vp-btn" id="vp-theme">🌓 Thème</button>
+    </div>
+  </div>
+
+  <div class="vp-alert" id="vp-alert">✅ Tout est normal</div>
+
+  <div class="vp-grid">
+    <div class="vp-card">
+      <div class="vp-label"><span>🌡️</span>Température</div>
+      <div class="vp-gauge">
+        <svg viewBox="0 0 120 120">
+          <circle class="vp-track" cx="60" cy="60" r="52"/>
+          <circle class="vp-bar" id="vp-t-bar" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="color:#ffd60a;stroke:#ffd60a"/>
+        </svg>
+        <div class="vp-value"><b id="vp-t-val">--</b><small>°C · 0–50</small></div>
+      </div>
+    </div>
+
+    <div class="vp-card">
+      <div class="vp-label"><span>💧</span>Humidité</div>
+      <div class="vp-gauge">
+        <svg viewBox="0 0 120 120">
+          <circle class="vp-track" cx="60" cy="60" r="52"/>
+          <circle class="vp-bar" id="vp-h-bar" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="color:#64d2ff;stroke:#64d2ff"/>
+        </svg>
+        <div class="vp-value"><b id="vp-h-val">--</b><small>% · 0–100</small></div>
+      </div>
+    </div>
+
+    <div class="vp-card">
+      <div class="vp-label"><span>🚶</span>Mouvement</div>
+      <div class="vp-motion">
+        <div class="vp-dot" id="vp-m-dot"></div>
+        <div class="vp-pill" id="vp-m-pill">AUCUN</div>
+      </div>
+    </div>
+
+    <div class="vp-card vp-wide vp-chart">
+      <div class="vp-label"><span>📈</span>Historique</div>
+      <div class="vp-chart-head">
+        <span id="vp-stats">Min -- · Moy -- · Max -- °C</span>
+        <span id="vp-range">--</span>
+      </div>
+      <svg viewBox="0 0 600 160" preserveAspectRatio="none">
+        <line x1="0" y1="80" x2="600" y2="80" stroke="currentColor" stroke-opacity=".15" stroke-dasharray="4 6"/>
+        <path id="vp-c-area" d="" fill="#ffd60a" fill-opacity=".12"/>
+        <path id="vp-c-t" d="" fill="none" stroke="#ffd60a" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+        <path id="vp-c-h" d="" fill="none" stroke="#64d2ff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      </svg>
+      <div class="vp-legend">
+        <span><i style="background:#ffd60a"></i>Température</span>
+        <span><i style="background:#64d2ff"></i>Humidité</span>
+      </div>
+    </div>
+
+    <div class="vp-card vp-wide">
+      <div class="vp-label"><span>🕘</span>Derniers mouvements</div>
+      <ul class="vp-events" id="vp-events"><li>Aucun événement</li></ul>
+    </div>
+  </div>
+</div>
+
+<script>
+// Remplace l'objet "scope" fourni normalement par Node-RED
+var scope = (function () {
+  var w = [];
+  return {
+    $watch: function (name, fn) { w.push(fn); },
+    $on: function () {},
+    _emit: function (m) { w.forEach(function (f) { f(m); }); }
+  };
+})();
+</script>
+<script>
+(function (scope) {
+  var C = 326.7, lastSeen = 0;
+  var $ = function (id) { return document.getElementById(id); };
+  var fmt = function (ts) { return new Date(ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); };
+
+  function tColor(t) { return t < 15 ? '#64d2ff' : t < 26 ? '#30d158' : t < 33 ? '#ffd60a' : '#ff453a'; }
+
+  function setGauge(barId, valId, value, min, max, col) {
+    var bar = $(barId), val = $(valId);
+    if (!bar || !val) return;
+    var pct = Math.max(0, Math.min(1, (value - min) / (max - min)));
+    bar.style.strokeDashoffset = C * (1 - pct);
+    if (col) { bar.style.stroke = col; bar.style.color = col; }
+    val.textContent = Number(value).toFixed(1);
+  }
+
+  function path(h, key, min, max) {
+    var n = h.length, d = '';
+    for (var i = 0; i < n; i++) {
+      var x = i / (n - 1) * 600;
+      var v = Math.max(0, Math.min(1, (h[i][key] - min) / (max - min)));
+      d += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + (150 - v * 140).toFixed(1);
+    }
+    return d;
+  }
+
+  function drawChart(h, s) {
+    if (!h || h.length < 2) return;
+    var pt = path(h, 'temp', 0, 50);
+    $('vp-c-t').setAttribute('d', pt);
+    $('vp-c-h').setAttribute('d', path(h, 'hum', 0, 100));
+    $('vp-c-area').setAttribute('d', pt + ' L600 150 L0 150 Z');
+    $('vp-range').textContent = fmt(h[0].t) + ' → ' + fmt(h[h.length - 1].t);
+    if (s) $('vp-stats').textContent = 'Min ' + s.min.toFixed(1) + ' · Moy ' + s.avg.toFixed(1) + ' · Max ' + s.max.toFixed(1) + ' °C';
+  }
+
+  function drawAlerts(alerts) {
+    var box = $('vp-alert');
+    if (!alerts || !alerts.length) { box.className = 'vp-alert'; box.textContent = '✅ Tout est normal'; return; }
+    var danger = alerts.some(function (a) { return a.level === 'danger'; });
+    box.className = 'vp-alert ' + (danger ? 'danger' : 'warn');
+    box.textContent = '⚠️ ' + alerts.map(function (a) { return a.text; }).join('  ·  ');
+  }
+
+  function drawEvents(ev) {
+    var ul = $('vp-events');
+    ul.innerHTML = '';
+    if (!ev || !ev.length) { var li0 = document.createElement('li'); li0.textContent = 'Aucun événement'; ul.appendChild(li0); return; }
+    ev.forEach(function (e) {
+      var li = document.createElement('li');
+      var a = document.createElement('span'); a.textContent = e.text;
+      var b = document.createElement('span'); b.textContent = new Date(e.t).toLocaleString();
+      li.appendChild(a); li.appendChild(b); ul.appendChild(li);
+    });
+  }
+
+  scope.$watch('msg', function (msg) {
+    if (!msg || !msg.payload || typeof msg.payload !== 'object') return;
+    var p = msg.payload;
+    lastSeen = Date.now();
+    setGauge('vp-t-bar', 'vp-t-val', p.temperature, 0, 50, tColor(p.temperature));
+    setGauge('vp-h-bar', 'vp-h-val', p.humidity, 0, 100);
+    var pill = $('vp-m-pill'), dot = $('vp-m-dot');
+    pill.textContent = p.motion ? 'DÉTECTÉ' : 'AUCUN';
+    pill.className = 'vp-pill' + (p.motion ? ' on' : '');
+    dot.className = 'vp-dot' + (p.motion ? ' on' : '');
+    drawChart(p.history, p.stats);
+    drawAlerts(p.alerts);
+    drawEvents(p.events);
+  });
+
+  // Statut en ligne / hors ligne
+  var timer = setInterval(function () {
+    var led = $('vp-led'), txt = $('vp-online');
+    if (!led || !txt || !lastSeen) return;
+    var s = Math.round((Date.now() - lastSeen) / 1000);
+    var ok = s < 30;
+    led.className = 'vp-led ' + (ok ? 'ok' : 'ko');
+    txt.textContent = ok ? 'En ligne · il y a ' + s + ' s' : 'Capteur hors ligne';
+  }, 1000);
+  scope.$on('$destroy', function () { clearInterval(timer); });
+
+  // Thème clair / sombre mémorisé
+  var root = $('vp-root');
+  try { if (localStorage.getItem('vp-theme') === 'light') root.classList.add('light'); } catch (e) {}
+  $('vp-theme').addEventListener('click', function () {
+    root.classList.toggle('light');
+    try { localStorage.setItem('vp-theme', root.classList.contains('light') ? 'light' : 'dark'); } catch (e) {}
+  });
+})(scope);
+</script>
+
+<script>
+// Simulateur de capteur (remplace MQTT + function "analyse")
+(function () {
+  var h = [], events = [], lastMotion = false, t = 23, hu = 55;
+  var T_HIGH = 30, T_LOW = 10, H_HIGH = 80, H_LOW = 25;
+
+  function step(now) {
+    t = Math.max(12, Math.min(36, t + (Math.random() - .5) * 1.4));
+    hu = Math.max(20, Math.min(90, hu + (Math.random() - .5) * 3));
+    var motion = Math.random() < .15;
+    h.push({ t: now, temp: t, hum: hu });
+    if (h.length > 120) h.shift();
+    if (motion && !lastMotion) {
+      events.unshift({ t: now, text: 'Mouvement détecté' });
+      events = events.slice(0, 5);
+    }
+    lastMotion = motion;
+    return motion;
+  }
+
+  function emit(motion) {
+    var temps = h.map(function (x) { return x.temp; });
+    var alerts = [];
+    if (t > T_HIGH) alerts.push({ level: 'danger', text: 'Température élevée : ' + t.toFixed(1) + ' °C' });
+    if (t < T_LOW)  alerts.push({ level: 'warn',   text: 'Température basse : ' + t.toFixed(1) + ' °C' });
+    if (hu > H_HIGH) alerts.push({ level: 'warn',  text: 'Humidité élevée : ' + hu.toFixed(1) + ' %' });
+    if (hu < H_LOW)  alerts.push({ level: 'warn',  text: 'Humidité basse : ' + hu.toFixed(1) + ' %' });
+    scope._emit({ payload: {
+      temperature: t, humidity: hu, motion: motion,
+      history: h.slice(),
+      stats: {
+        min: Math.min.apply(null, temps),
+        max: Math.max.apply(null, temps),
+        avg: temps.reduce(function (a, b) { return a + b; }, 0) / temps.length
+      },
+      events: events, alerts: alerts
+    }});
+  }
+
+  var start = Date.now() - 40 * 2000;
+  for (var i = 0; i < 40; i++) step(start + i * 2000);
+  emit(false);
+  setInterval(function () { emit(step(Date.now())); }, 2000);
+})();
+</script>
+</div>
+</body>
+</html>
