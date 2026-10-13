@@ -1,0 +1,431 @@
+[
+    {
+        "id": "4634f12899718dad",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a11d4c7768696019",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "671a8a9862714bb9",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "8bb25792a9b64588",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#172033",
+            "primary": "#2563eb",
+            "bgPage": "#f4f7fb",
+            "groupBg": "#ffffff",
+            "groupOutline": "#e5eaf1"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "126px",
+            "groupGap": "16px",
+            "groupBorderRadius": "18px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "91826fd7c72769a0",
+        "type": "ui-page",
+        "name": "Page 1",
+        "ui": "671a8a9862714bb9",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "8bb25792a9b64588",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "08cb606e2df43791",
+        "type": "ui-group",
+        "name": "Sensors",
+        "page": "91826fd7c72769a0",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "7a4023c9d5d6c84a",
+        "type": "ui_tab",
+        "name": "Sensor",
+        "icon": "temperature",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "6d49a925270f1918",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "4c02e170e9e04ca5",
+        "type": "ui_group",
+        "name": "SMART HOME MONITORING",
+        "tab": "7a4023c9d5d6c84a",
+        "order": 1,
+        "disp": true,
+        "width": "25",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "fb4d01220588bdde",
+        "type": "mqtt in",
+        "z": "4634f12899718dad",
+        "name": "",
+        "topic": "smart-home-hayfa/test",
+        "qos": "0",
+        "datatype": "utf8",
+        "broker": "a11d4c7768696019",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 220,
+        "wires": [
+            [
+                "148dcc6393d97512",
+                "3bc3dcc3646657a9"
+            ]
+        ]
+    },
+    {
+        "id": "3bc3dcc3646657a9",
+        "type": "debug",
+        "z": "4634f12899718dad",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 220,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "148dcc6393d97512",
+        "type": "json",
+        "z": "4634f12899718dad",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 350,
+        "y": 220,
+        "wires": [
+            [
+                "a1e9dc75c8e41097"
+            ]
+        ]
+    },
+    {
+        "id": "0c9b6c5ed10358b5",
+        "type": "ui_template",
+        "z": "4634f12899718dad",
+        "group": "4c02e170e9e04ca5",
+        "name": "",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "format": "<style>\n  .vp-wrap {\n    --fg: #fff; --fg2: rgba(255,255,255,.7);\n    --card: rgba(255,255,255,.14); --cardb: rgba(255,255,255,.28); --track: rgba(255,255,255,.2);\n    width: 100%; box-sizing: border-box; padding: 22px 18px; border-radius: 32px; overflow: hidden;\n    font-family: -apple-system, \"SF Pro Display\", \"Segoe UI\", Roboto, sans-serif; color: var(--fg);\n    background:\n      radial-gradient(circle at 15% 20%, #5b8cff 0%, transparent 45%),\n      radial-gradient(circle at 85% 80%, #b06cff 0%, transparent 45%),\n      radial-gradient(circle at 70% 15%, #29d3c6 0%, transparent 40%),\n      #0f1226;\n  }\n  .vp-wrap.light {\n    --fg: #14182d; --fg2: rgba(20,24,45,.65);\n    --card: rgba(255,255,255,.55); --cardb: rgba(255,255,255,.95); --track: rgba(20,24,45,.12);\n    background:\n      radial-gradient(circle at 15% 20%, #a9c1ff 0%, transparent 45%),\n      radial-gradient(circle at 85% 80%, #e0c4ff 0%, transparent 45%),\n      radial-gradient(circle at 70% 15%, #a8f0e8 0%, transparent 40%),\n      #eef2fb;\n  }\n  .vp-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 14px; }\n  .vp-title, .vp-head { background: transparent !important; color: var(--fg) !important; padding: 0; }\n  .vp-title { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; opacity: .7; margin: 0 0 2px 4px; }\n  .vp-head  { font-size: 26px; font-weight: 600; margin: 0 0 0 4px; }\n  .vp-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }\n  .vp-status { display: flex; align-items: center; gap: 7px; font-size: 12px; padding: 7px 12px; border-radius: 999px;\n               background: var(--card); border: 1px solid var(--cardb); color: var(--fg); }\n  .vp-led { width: 9px; height: 9px; border-radius: 50%; background: #888; }\n  .vp-led.ok { background: #30d158; box-shadow: 0 0 8px #30d158; }\n  .vp-led.ko { background: #ff453a; box-shadow: 0 0 8px #ff453a; }\n  .vp-btn { cursor: pointer; border: 1px solid var(--cardb); background: var(--card); color: var(--fg);\n            border-radius: 999px; padding: 7px 12px; font-size: 13px; }\n\n  .vp-alert { margin-bottom: 14px; padding: 12px 16px; border-radius: 18px; font-size: 14px; font-weight: 500;\n              background: rgba(48,209,88,.25); border: 1px solid rgba(48,209,88,.6); color: var(--fg); }\n  .vp-alert.warn   { background: rgba(255,214,10,.28); border-color: rgba(255,214,10,.8); }\n  .vp-alert.danger { background: rgba(255,69,58,.32);  border-color: rgba(255,69,58,.85); }\n\n    .vp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }\n    @media (max-width: 700px) { .vp-grid { grid-template-columns: 1fr; } }\n  .vp-card { min-width: 0; box-sizing: border-box; padding: 18px 14px 16px; border-radius: 26px;\n             background: var(--card); backdrop-filter: blur(28px) saturate(160%); -webkit-backdrop-filter: blur(28px) saturate(160%);\n             border: 1px solid var(--cardb); box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 16px 32px rgba(0,0,0,.2);\n             text-align: center; color: var(--fg); }\n  .vp-wide { grid-column: 1 / -1; text-align: left; }\n  .vp-label { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px; font-weight: 500; }\n  .vp-wide .vp-label { justify-content: flex-start; }\n\n  .vp-gauge { position: relative; width: 100%; max-width: 130px; aspect-ratio: 1/1; margin: 12px auto 0; }\n  .vp-gauge svg { width: 100%; height: 100%; transform: rotate(-90deg); }\n  .vp-track { fill: none; stroke: var(--track); stroke-width: 12; }\n  .vp-bar { fill: none; stroke-width: 12; stroke-linecap: round;\n            transition: stroke-dashoffset .8s cubic-bezier(.4,0,.2,1), stroke .4s; filter: drop-shadow(0 0 6px currentColor); }\n  .vp-value { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }\n  .vp-value b { font-size: 30px; font-weight: 600; line-height: 1; color: var(--fg) !important; background: transparent !important; }\n  .vp-value small { font-size: 11px; color: var(--fg2) !important; margin-top: 4px; background: transparent !important; }\n\n  .vp-motion { min-height: 130px; margin-top: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }\n  .vp-pill { padding: 8px 18px; border-radius: 999px; font-size: 15px; font-weight: 600; letter-spacing: .05em;\n             background: rgba(80,220,140,.28); border: 1px solid rgba(120,240,170,.6); color: var(--fg); transition: all .3s; }\n  .vp-pill.on { background: rgba(255,99,99,.4); border-color: rgba(255,140,140,.8); box-shadow: 0 0 22px rgba(255,99,99,.65); }\n  .vp-dot { width: 14px; height: 14px; border-radius: 50%; background: #50dc8c; box-shadow: 0 0 14px #50dc8c; }\n  .vp-dot.on { background: #ff6363; box-shadow: 0 0 18px #ff6363; animation: vp-pulse 1s infinite; }\n  @keyframes vp-pulse { 50% { transform: scale(1.5); opacity: .6; } }\n\n  .vp-chart-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; font-size: 12px; color: var(--fg2); margin-top: 6px; }\n  .vp-chart svg { width: 100%; height: 160px; margin-top: 10px; display: block; }\n  .vp-legend { display: flex; gap: 14px; font-size: 12px; color: var(--fg2); margin-top: 8px; }\n  .vp-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }\n  .vp-events { list-style: none; margin: 10px 0 0; padding: 0; font-size: 13px; color: var(--fg); }\n  .vp-events li { padding: 7px 0; border-bottom: 1px solid var(--track); display: flex; justify-content: space-between; }\n  .vp-events li:last-child { border-bottom: 0; }\n</style>\n\n<div class=\"vp-wrap\" id=\"vp-root\">\n  <div class=\"vp-top\">\n    <div>\n            <div class=\"vp-title\" style=\"background:transparent!important;color:var(--fg)!important\">Smart Home</div>\n            <div class=\"vp-head\" style=\"background:transparent!important;color:var(--fg)!important\">Monitoring</div>\n    </div>\n    <div class=\"vp-tools\">\n      <div class=\"vp-status\"><span class=\"vp-led\" id=\"vp-led\"></span><span id=\"vp-online\">En attente…</span></div>\n      <button class=\"vp-btn\" id=\"vp-theme\">🌓 Thème</button>\n    </div>\n  </div>\n\n  <div class=\"vp-alert\" id=\"vp-alert\">✅ Tout est normal</div>\n\n  <div class=\"vp-grid\">\n    <div class=\"vp-card\">\n      <div class=\"vp-label\"><span>🌡️</span>Température</div>\n      <div class=\"vp-gauge\">\n        <svg viewBox=\"0 0 120 120\">\n          <circle class=\"vp-track\" cx=\"60\" cy=\"60\" r=\"52\"/>\n          <circle class=\"vp-bar\" id=\"vp-t-bar\" cx=\"60\" cy=\"60\" r=\"52\" stroke-dasharray=\"326.7\" stroke-dashoffset=\"326.7\" style=\"color:#ffd60a;stroke:#ffd60a\"/>\n        </svg>\n        <div class=\"vp-value\"><b id=\"vp-t-val\">--</b><small>°C · 0–50</small></div>\n      </div>\n    </div>\n\n    <div class=\"vp-card\">\n      <div class=\"vp-label\"><span>💧</span>Humidité</div>\n      <div class=\"vp-gauge\">\n        <svg viewBox=\"0 0 120 120\">\n          <circle class=\"vp-track\" cx=\"60\" cy=\"60\" r=\"52\"/>\n          <circle class=\"vp-bar\" id=\"vp-h-bar\" cx=\"60\" cy=\"60\" r=\"52\" stroke-dasharray=\"326.7\" stroke-dashoffset=\"326.7\" style=\"color:#64d2ff;stroke:#64d2ff\"/>\n        </svg>\n        <div class=\"vp-value\"><b id=\"vp-h-val\">--</b><small>% · 0–100</small></div>\n      </div>\n    </div>\n\n    <div class=\"vp-card\">\n      <div class=\"vp-label\"><span>🚶</span>Mouvement</div>\n      <div class=\"vp-motion\">\n        <div class=\"vp-dot\" id=\"vp-m-dot\"></div>\n        <div class=\"vp-pill\" id=\"vp-m-pill\">AUCUN</div>\n      </div>\n    </div>\n\n    <div class=\"vp-card vp-wide vp-chart\">\n      <div class=\"vp-label\"><span>📈</span>Historique</div>\n      <div class=\"vp-chart-head\">\n        <span id=\"vp-stats\">Min -- · Moy -- · Max -- °C</span>\n        <span id=\"vp-range\">--</span>\n      </div>\n      <svg viewBox=\"0 0 600 160\" preserveAspectRatio=\"none\">\n        <line x1=\"0\" y1=\"80\" x2=\"600\" y2=\"80\" stroke=\"currentColor\" stroke-opacity=\".15\" stroke-dasharray=\"4 6\"/>\n        <path id=\"vp-c-area\" d=\"\" fill=\"#ffd60a\" fill-opacity=\".12\"/>\n        <path id=\"vp-c-t\" d=\"\" fill=\"none\" stroke=\"#ffd60a\" stroke-width=\"2.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>\n        <path id=\"vp-c-h\" d=\"\" fill=\"none\" stroke=\"#64d2ff\" stroke-width=\"2.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>\n      </svg>\n      <div class=\"vp-legend\">\n        <span><i style=\"background:#ffd60a\"></i>Température</span>\n        <span><i style=\"background:#64d2ff\"></i>Humidité</span>\n      </div>\n    </div>\n\n    <div class=\"vp-card vp-wide\">\n      <div class=\"vp-label\"><span>🕘</span>Derniers mouvements</div>\n      <ul class=\"vp-events\" id=\"vp-events\"><li>Aucun événement</li></ul>\n    </div>\n  </div>\n</div>\n\n<script>\n(function (scope) {\n  var C = 326.7, lastSeen = 0;\n  var $ = function (id) { return document.getElementById(id); };\n  var fmt = function (ts) { return new Date(ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); };\n\n  function tColor(t) { return t < 15 ? '#64d2ff' : t < 26 ? '#30d158' : t < 33 ? '#ffd60a' : '#ff453a'; }\n\n  function setGauge(barId, valId, value, min, max, col) {\n    var bar = $(barId), val = $(valId);\n    if (!bar || !val) return;\n    var pct = Math.max(0, Math.min(1, (value - min) / (max - min)));\n    bar.style.strokeDashoffset = C * (1 - pct);\n    if (col) { bar.style.stroke = col; bar.style.color = col; }\n    val.textContent = Number(value).toFixed(1);\n  }\n\n  function path(h, key, min, max) {\n    var n = h.length, d = '';\n    for (var i = 0; i < n; i++) {\n      var x = i / (n - 1) * 600;\n      var v = Math.max(0, Math.min(1, (h[i][key] - min) / (max - min)));\n      d += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + (150 - v * 140).toFixed(1);\n    }\n    return d;\n  }\n\n  function drawChart(h, s) {\n    if (!h || h.length < 2) return;\n    var pt = path(h, 'temp', 0, 50);\n    $('vp-c-t').setAttribute('d', pt);\n    $('vp-c-h').setAttribute('d', path(h, 'hum', 0, 100));\n    $('vp-c-area').setAttribute('d', pt + ' L600 150 L0 150 Z');\n    $('vp-range').textContent = fmt(h[0].t) + ' → ' + fmt(h[h.length - 1].t);\n    if (s) $('vp-stats').textContent = 'Min ' + s.min.toFixed(1) + ' · Moy ' + s.avg.toFixed(1) + ' · Max ' + s.max.toFixed(1) + ' °C';\n  }\n\n  function drawAlerts(alerts) {\n    var box = $('vp-alert');\n    if (!alerts || !alerts.length) { box.className = 'vp-alert'; box.textContent = '✅ Tout est normal'; return; }\n    var danger = alerts.some(function (a) { return a.level === 'danger'; });\n    box.className = 'vp-alert ' + (danger ? 'danger' : 'warn');\n    box.textContent = '⚠️ ' + alerts.map(function (a) { return a.text; }).join('  ·  ');\n  }\n\n  function drawEvents(ev) {\n    var ul = $('vp-events');\n    ul.innerHTML = '';\n    if (!ev || !ev.length) { var li0 = document.createElement('li'); li0.textContent = 'Aucun événement'; ul.appendChild(li0); return; }\n    ev.forEach(function (e) {\n      var li = document.createElement('li');\n      var a = document.createElement('span'); a.textContent = e.text;\n      var b = document.createElement('span'); b.textContent = new Date(e.t).toLocaleString();\n      li.appendChild(a); li.appendChild(b); ul.appendChild(li);\n    });\n  }\n\n  scope.$watch('msg', function (msg) {\n    if (!msg || !msg.payload || typeof msg.payload !== 'object') return;\n    var p = msg.payload;\n    lastSeen = Date.now();\n    setGauge('vp-t-bar', 'vp-t-val', p.temperature, 0, 50, tColor(p.temperature));\n    setGauge('vp-h-bar', 'vp-h-val', p.humidity, 0, 100);\n    var pill = $('vp-m-pill'), dot = $('vp-m-dot');\n    pill.textContent = p.motion ? 'DÉTECTÉ' : 'AUCUN';\n    pill.className = 'vp-pill' + (p.motion ? ' on' : '');\n    dot.className = 'vp-dot' + (p.motion ? ' on' : '');\n    drawChart(p.history, p.stats);\n    drawAlerts(p.alerts);\n    drawEvents(p.events);\n  });\n\n  // Statut en ligne / hors ligne\n  var timer = setInterval(function () {\n    var led = $('vp-led'), txt = $('vp-online');\n    if (!led || !txt || !lastSeen) return;\n    var s = Math.round((Date.now() - lastSeen) / 1000);\n    var ok = s < 30;\n    led.className = 'vp-led ' + (ok ? 'ok' : 'ko');\n    txt.textContent = ok ? 'En ligne · il y a ' + s + ' s' : 'Capteur hors ligne';\n  }, 1000);\n  scope.$on('$destroy', function () { clearInterval(timer); });\n\n  // Thème clair / sombre mémorisé\n  var root = $('vp-root');\n  try { if (localStorage.getItem('vp-theme') === 'light') root.classList.add('light'); } catch (e) {}\n  $('vp-theme').addEventListener('click', function () {\n    root.classList.toggle('light');\n    try { localStorage.setItem('vp-theme', root.classList.contains('light') ? 'light' : 'dark'); } catch (e) {}\n  });\n})(scope);\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 660,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a1e9dc75c8e41097",
+        "type": "function",
+        "z": "4634f12899718dad",
+        "name": "analyse",
+        "func": "const MAX = 120;                       // nombre de mesures gardées\nconst COOLDOWN = 10 * 60 * 1000;       // anti-spam des alertes : 10 min\nconst T_HIGH = 30, T_LOW = 10;         // seuils température (°C)\nconst H_HIGH = 80, H_LOW = 25;         // seuils humidité (%)\n\nlet p = msg.payload;\nif (typeof p === 'string') {\n    try { p = JSON.parse(p); } catch (e) { node.warn('JSON invalide'); return null; }\n}\nconst temp = parseFloat(p.temperature);\nconst hum  = parseFloat(p.humidity);\nif (isNaN(temp) || isNaN(hum)) { node.warn('Valeurs invalides'); return null; }\nconst motion = String(p.motion).toUpperCase() !== 'NONE';\nconst now = Date.now();\n\n// Historique glissant\nlet h = flow.get('history') || [];\nh.push({ t: now, temp: temp, hum: hum });\nif (h.length > MAX) h = h.slice(-MAX);\nflow.set('history', h);\n\n// Statistiques\nconst temps = h.map(x => x.temp);\nconst stats = {\n    min: Math.min(...temps),\n    max: Math.max(...temps),\n    avg: temps.reduce((a, b) => a + b, 0) / temps.length\n};\n\n// Journal des mouvements (uniquement quand ça passe de \"rien\" à \"détecté\")\nlet events = flow.get('events') || [];\nif (motion && !flow.get('lastMotion')) {\n    events.unshift({ t: now, text: 'Mouvement détecté' });\n    events = events.slice(0, 5);\n    flow.set('events', events);\n}\nflow.set('lastMotion', motion);\n\n// Alertes\nconst alerts = [];\nif (temp > T_HIGH) alerts.push({ level: 'danger', text: 'Température élevée : ' + temp.toFixed(1) + ' °C' });\nif (temp < T_LOW)  alerts.push({ level: 'warn',   text: 'Température basse : ' + temp.toFixed(1) + ' °C' });\nif (hum > H_HIGH)  alerts.push({ level: 'warn',   text: 'Humidité élevée : ' + hum.toFixed(1) + ' %' });\nif (hum < H_LOW)   alerts.push({ level: 'warn',   text: 'Humidité basse : ' + hum.toFixed(1) + ' %' });\n\n// Notification externe (sortie 2) avec cooldown\nlet notif = null;\nconst key = alerts.map(a => a.text.split(':')[0]).join('|');\nconst last = flow.get('lastAlert') || { key: '', t: 0 };\nif (alerts.length && (key !== last.key || now - last.t > COOLDOWN)) {\n    notif = { payload: '⚠️ Smart Home : ' + alerts.map(a => a.text).join(' / ') };\n    flow.set('lastAlert', { key: key, t: now });\n}\nif (!alerts.length) flow.set('lastAlert', { key: '', t: 0 });\n\nmsg.payload = {\n    temperature: temp,\n    humidity: hum,\n    motion: motion,\n    history: h,\n    stats: stats,\n    events: events,\n    alerts: alerts\n};\nreturn [msg, notif];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 220,
+        "wires": [
+            [
+                "0c9b6c5ed10358b5"
+            ],
+            [
+                "51f9d8a7ba5ddfce",
+                "7c4e0795e6846df8"
+            ]
+        ]
+    },
+    {
+        "id": "51f9d8a7ba5ddfce",
+        "type": "debug",
+        "z": "4634f12899718dad",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "7c4e0795e6846df8",
+        "type": "function",
+        "z": "4634f12899718dad",
+        "name": "format ntfy",
+        "func": "msg.url = 'https://ntfy.sh/votre-topic-secret';\nmsg.method = 'POST';\nmsg.headers = {\n    'Title': 'Smart Home',\n    'Priority': 'high',\n    'Tags': 'warning'\n};\n// msg.payload contient déjà le texte de l'alerte\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 320,
+        "wires": [
+            [
+                "173747fe8c7256de"
+            ]
+        ]
+    },
+    {
+        "id": "173747fe8c7256de",
+        "type": "http request",
+        "z": "4634f12899718dad",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 710,
+        "y": 320,
+        "wires": [
+            [
+                "58f322d09a499110"
+            ]
+        ]
+    },
+    {
+        "id": "58f322d09a499110",
+        "type": "debug",
+        "z": "4634f12899718dad",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "92e7b66e5b63557b",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.32.0",
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
