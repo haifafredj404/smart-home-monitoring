@@ -29,7 +29,7 @@ Format du message publié par le capteur :
 
 ## Simulation du capteur (Wokwi)
 
-ESP32 + DHT22 (température / humidité) + capteur PIR (mouvement), simulés sur [Wokwi](https://wokwi.com/).
+ESP32 + DHT22 (température / humidité) + capteur PIR (mouvement), simulés sur [Wokwi]([https://wokwi.com/](https://wokwi.com/projects/476346247244546049)).
 
 ![Câblage Wokwi](docs/wokwi.png)
 
@@ -47,14 +47,6 @@ Ouvrez `demo.html` dans un navigateur : le dashboard fonctionne avec des donnée
 | `dashboard.html` | Code du nœud ui_template : interface du dashboard |
 | `demo.html` | Démo autonome avec données simulées |
 | `docs/` | Captures d'écran (dashboard et câblage Wokwi) |
-
-## Installation
-
-1. Installer [Node-RED](https://nodered.org/) et le module `node-red-dashboard`.
-2. Importer `flow.json` : menu ☰ → Import → coller le contenu.
-3. Vérifier le broker et le topic MQTT dans le nœud `mqtt in`.
-4. Dans le nœud `format ntfy`, remplacer `votre-topic-secret` par un nom de topic personnel et long, puis s'abonner à ce topic dans l'application ntfy sur le téléphone.
-5. Lancer la simulation Wokwi, déployer (Deploy) dans Node-RED, puis ouvrir `http://localhost:1880/ui`.
 
 ## Réglage des seuils d'alerte
 
