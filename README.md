@@ -1,76 +1,76 @@
-# Smart Home Monitoring – Dashboard IoT temps réel
+# Smart Home Monitoring – Real-Time IoT Dashboard
 
-Système de surveillance domestique complet, du capteur jusqu'au tableau de bord : un ESP32 (simulé sur Wokwi) mesure la température, l'humidité et le mouvement, publie en MQTT, puis Node-RED traite les données et les affiche dans une interface web personnalisée au style *glassmorphism* (inspirée de visionOS), avec historique, alertes et notifications mobiles.
+Complete home monitoring system, from the sensor to the dashboard: an ESP32 (simulated on Wokwi) measures temperature, humidity and motion, publishes over MQTT, then Node-RED processes the data and displays it in a custom web interface in *glassmorphism* style (inspired by visionOS), with history, alerts and mobile notifications.
 
-![Capture du dashboard](docs/screenshot.png)
+![Dashboard screenshot](docs/screenshot.png)
 
-## Fonctionnalités
+## Features
 
-- Mesure de la température et de l'humidité (DHT22) et détection de mouvement (PIR) sur ESP32
-- Publication JSON toutes les 5 s via MQTT (broker HiveMQ), avec reconnexion automatique
-- Validation et parsing des données, gestion des messages invalides
-- **Historique glissant** des 120 dernières mesures avec courbe, min / moyenne / max
-- **Système d'alertes** à seuils (température et humidité) avec anti-spam (cooldown de 10 min)
-- **Notifications push sur mobile** via ntfy
-- **Journal des événements** de mouvement
-- **Statut du capteur** en ligne / hors ligne (aucune donnée reçue depuis plus de 30 s)
-- Mode clair / sombre mémorisé dans le navigateur
-- Interface responsive (mobile et bureau)
+- Temperature and humidity measurement (DHT22) and motion detection (PIR) on ESP32
+- JSON publishing every 5 s via MQTT (HiveMQ broker), with automatic reconnection
+- Data validation and parsing, handling of invalid messages
+- **Rolling history** of the last 120 measurements with a chart, min / average / max
+- **Threshold alert system** (temperature and humidity) with anti-spam (10 min cooldown)
+- **Mobile push notifications** via ntfy
+- **Motion event log**
+- **Sensor status** online / offline (no data received for more than 30 s)
+- Light / dark mode remembered in the browser
+- Responsive interface (mobile and desktop)
 
 ## Architecture
 
-Format du message publié par le capteur :
+Format of the message published by the sensor:
 
 ```json
 {"temperature": 23.10, "humidity": 66.50, "motion": "NONE"}
 ```
 
-`motion` vaut `"NONE"` ou `"DETECTED"`.
+`motion` is `"NONE"` or `"DETECTED"`.
 
-## Simulation du capteur (Wokwi)
+## Sensor Simulation (Wokwi)
 
-ESP32 + DHT22 (température / humidité) + capteur PIR (mouvement), simulés sur [Wokwi]([https://wokwi.com/](https://wokwi.com/projects/476346247244546049)).
+ESP32 + DHT22 (temperature / humidity) + PIR sensor (motion), simulated on [Wokwi]([https://wokwi.com/](https://wokwi.com/projects/476346247244546049)).
 
-![Câblage Wokwi](docs/wokwi.png)
+![Wokwi wiring](docs/wokwi.png)
 
-## Démo sans installation
+## Demo Without Installation
 
-Ouvrez `demo.html` dans un navigateur : le dashboard fonctionne avec des données simulées, sans Node-RED ni capteur.
+Open `demo.html` in a browser: the dashboard works with simulated data, without Node-RED or a sensor.
 
-## Contenu du dépôt
+## Repository Contents
 
-| Fichier | Rôle |
+| File | Role |
 |---|---|
-| `wokwi/sketch.ino` | Code de l'ESP32 (lecture des capteurs, publication MQTT) |
-| `flow.json` | Export du flow Node-RED (à importer) |
-| `analyse.js` | Code du nœud function : historique, statistiques, alertes |
-| `dashboard.html` | Code du nœud ui_template : interface du dashboard |
-| `demo.html` | Démo autonome avec données simulées |
-| `docs/` | Captures d'écran (dashboard et câblage Wokwi) |
+| `wokwi/sketch.ino` | ESP32 code (sensor reading, MQTT publishing) |
+| `flow.json` | Node-RED flow export (to import) |
+| `analyse.js` | Function node code: history, statistics, alerts |
+| `dashboard.html` | ui_template node code: dashboard interface |
+| `demo.html` | Standalone demo with simulated data |
+| `docs/` | Screenshots (dashboard and Wokwi wiring) |
 
-## Notifications mobiles
+## Mobile Notifications
 
-Quand un seuil est dépassé, une notification push est envoyée sur le téléphone via ntfy (avec un anti-spam de 10 minutes entre deux alertes identiques).
+When a threshold is exceeded, a push notification is sent to the phone via ntfy (with a 10-minute anti-spam delay between two identical alerts).
 
-![Notifications ntfy](docs/ntfy.png)
+![ntfy notifications](docs/ntfy.png)
 
-*Capture prise pendant un test, avec les seuils temporairement abaissés pour déclencher les alertes.*
+*Screenshot taken during a test, with the thresholds temporarily lowered to trigger the alerts.*
 
-## Réglage des seuils d'alerte
+## Alert Threshold Settings
 
 ```js
-const T_HIGH = 30, T_LOW = 10;   // température (°C)
-const H_HIGH = 80, H_LOW = 25;   // humidité (%)
-const COOLDOWN = 10 * 60 * 1000; // anti-spam : 10 minutes
+const T_HIGH = 30, T_LOW = 10;   // temperature (°C)
+const H_HIGH = 80, H_LOW = 25;   // humidity (%)
+const COOLDOWN = 10 * 60 * 1000; // anti-spam: 10 minutes
 ```
 
 ## Technologies
 
 ESP32 (Arduino C++) · Wokwi · MQTT (HiveMQ) · Node-RED · JSON · JavaScript · HTML/CSS (SVG, backdrop-filter) · AngularJS (ui_template) · ntfy
 
-## Pistes d'amélioration
+## Improvement Ideas
 
-- Persistance de l'historique (InfluxDB + Grafana)
-- Commande d'un actionneur (relais, LED) depuis le dashboard
-- Authentification MQTT (TLS + identifiants)
-- Déploiement sur Raspberry Pi avec Docker
+- History persistence (InfluxDB + Grafana)
+- Actuator control (relay, LED) from the dashboard
+- MQTT authentication (TLS + credentials)
+- Deployment on Raspberry Pi with Docker
