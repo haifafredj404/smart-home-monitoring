@@ -48,6 +48,14 @@ Ouvrez `demo.html` dans un navigateur : le dashboard fonctionne avec des donnée
 | `demo.html` | Démo autonome avec données simulées |
 | `docs/` | Captures d'écran (dashboard et câblage Wokwi) |
 
+## Notifications mobiles
+
+Quand un seuil est dépassé, une notification push est envoyée sur le téléphone via ntfy (avec un anti-spam de 10 minutes entre deux alertes identiques).
+
+![Notifications ntfy](docs/ntfy.png)
+
+*Capture prise pendant un test, avec les seuils temporairement abaissés pour déclencher les alertes.*
+
 ## Réglage des seuils d'alerte
 
 ```js
